@@ -85,18 +85,7 @@ func update_color(vehicle, col):
 			break;
 
 func fill_color_selector():
-	var colors = [
-		Color("222222"),
-		Color("ababab"),
-		Color("2c5f93"),
-		Color("932c2c"),
-		Color("cfcd42"),
-		Color("5c982c"),
-		Color("bf5b9d"),
-		Color("e55731")
-	];
-	
-	for i in colors:
+	for i in globals.vehicleColorSet:
 		var inst = preload("res://scenes/ui/colorbox.tscn").instance();
 		inst.set_name(i.to_html(false));
 		inst.set_color(i);

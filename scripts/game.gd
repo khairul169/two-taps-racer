@@ -2,7 +2,6 @@ extends Node
 
 onready var lblScore = get_node("gui/score");
 onready var lblScore2 = get_node("gui/score2");
-onready var lblFps = get_node("gui/fps");
 
 onready var camera = get_node("env/cam_base");
 onready var level = get_node("env/level");
@@ -30,9 +29,6 @@ var vehicles = [null, null];
 func _init():
 	# Randomize random seed
 	randomize();
-	
-	# Set the frame limit
-	OS.set_target_fps(60);
 
 func _ready():
 	init_game();
@@ -60,8 +56,10 @@ func init_game():
 	vehicles[0].gameMain = self;
 	vehicles[1].gameMain = self;
 	
-	if (OS.get_name() == "Android"):
-		enableShadow = false;
+	#if (OS.get_name() == "Android"):
+	#	enableShadow = false;
+	
+	enableShadow = globals.get_gamedata('cfg_shadows', true);
 	
 	get_node("env/sun").set_project_shadows(enableShadow);
 	get_node("gui/startGame").show();
@@ -104,7 +102,6 @@ func _process(delta):
 func update_gui():
 	lblScore.set_text(str(int(curScore)).pad_zeros(5));
 	lblScore2.set_text(str("High: ", int(globals.highScore)).pad_zeros(5));
-	lblFps.set_text(str(int(OS.get_frames_per_second())));
 
 func _fixed_process(delta):
 	if (gameStarted && !gameOver):
@@ -162,7 +159,7 @@ func spawn_ai():
 		
 		var inst = vehicle_ai.instance();
 		inst.set_name("ai");
-		var col = Color(rand_range(0.2, 0.8), rand_range(0.2, 0.8), rand_range(0.2, 0.8));
+		var col = globals.vehicleColorSet[rand_range(0, globals.vehicleColorSet.size())];
 		inst.change_color(col);
 		inst.moveSpeed = rand_range(7.0, 8.0);
 		inst.set_translation(spawnPos);

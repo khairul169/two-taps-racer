@@ -72,11 +72,27 @@ size_flags/vertical = 2
 margin/left = 300.0
 margin/top = 220.0
 margin/right = 500.0
-margin/bottom = 270.0
+margin/bottom = 260.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 text = "Play"
+flat = false
+
+[node name="btnSettings" type="Button" parent="control"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 300.0
+margin/top = 280.0
+margin/right = 500.0
+margin/bottom = 320.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Settings"
 flat = false
 
 [node name="btnQuit" type="Button" parent="control"]
@@ -86,9 +102,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 300.0
-margin/top = 300.0
+margin/top = 340.0
 margin/right = 500.0
-margin/bottom = 350.0
+margin/bottom = 380.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
