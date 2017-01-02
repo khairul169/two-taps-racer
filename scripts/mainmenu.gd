@@ -1,9 +1,22 @@
-extends Control
+extends Node
+
+onready var vehicle = load("res://scenes/vehicle_ai.tscn");
+onready var vehicle_node = get_node("world/vehicles");
+onready var spawn_pos = get_node("world/spawnPos").get_translation();
+
+var nextSpawn = 0.0;
 
 func _ready():
-	get_node("control/btnPlay").connect("pressed", self, "play");
-	get_node("control/btnSettings").connect("pressed", self, "settings");
-	get_node("control/btnQuit").connect("pressed", self, "quit");
+	get_node("gui/btnPlay").connect("pressed", self, "play");
+	get_node("gui/btnSettings").connect("pressed", self, "settings");
+	get_node("gui/btnQuit").connect("pressed", self, "quit");
+	
+	if (globals.get_gamedata('cfg_dynamicmenu', true)):
+		get_node("gui/bgImage").queue_free();
+		set_process(true);
+	else:
+		get_node("gui/bgImage").show();
+		get_node("world").queue_free();
 
 func play():
 	transition.change_scene(transition.game_scene);
@@ -14,3 +27,30 @@ func settings():
 func quit():
 	globals.save_game();
 	get_tree().quit();
+
+func _process(delta):
+	nextSpawn -= delta;
+	
+	if (nextSpawn <= 0.0):
+		spawn_ai();
+		nextSpawn = rand_range(4.0, 5.0);
+
+func spawn_ai():
+	if (vehicle_node.get_child_count() > 2):
+		for i in range(2):
+			vehicle_node.get_child(i).queue_free();
+	
+	var randPos = [[-4.5, -2.0], [2.0, 4.5]];
+	
+	for i in range(2):
+		var spawnPos = spawn_pos;
+		spawnPos.x = randPos[i][int(rand_range(0, randPos[i].size()))];
+		spawnPos.z += rand_range(-5.0, 5.0);
+		
+		var inst = vehicle.instance();
+		inst.set_name("ai");
+		var col = globals.vehicleColorSet[rand_range(0, globals.vehicleColorSet.size())];
+		inst.change_color(col);
+		inst.moveSpeed = rand_range(7.0, 10.0);
+		inst.set_translation(spawnPos);
+		vehicle_node.add_child(inst);

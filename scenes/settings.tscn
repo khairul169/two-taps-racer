@@ -104,16 +104,46 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="cfgShowFPS" type="CheckButton" parent="."]
+[node name="scrollContainer" type="ScrollContainer" parent="."]
 
+anchor/right = 1
+anchor/bottom = 1
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 60.0
 margin/top = 120.0
-margin/right = 380.0
-margin/bottom = 160.0
+margin/right = 40.0
+margin/bottom = 60.0
+scroll/horizontal = true
+scroll/vertical = true
+
+[node name="gridContainer" type="GridContainer" parent="scrollContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 680.0
+margin/bottom = 220.0
+custom_constants/vseparation = 5
+custom_constants/hseparation = 40
+columns = 2
+
+[node name="cfgShowFPS" type="CheckButton" parent="scrollContainer/gridContainer"]
+
+rect/min_size = Vector2( 320, 40 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 320.0
+margin/bottom = 40.0
 toggle_mode = true
 enabled_focus_mode = 2
 shortcut = null
@@ -121,16 +151,17 @@ text = "Show FPS"
 flat = false
 align = 0
 
-[node name="cfgFullscreen" type="CheckButton" parent="."]
+[node name="cfgFullscreen" type="CheckButton" parent="scrollContainer/gridContainer"]
 
+rect/min_size = Vector2( 320, 40 )
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 60.0
-margin/top = 170.0
-margin/right = 380.0
-margin/bottom = 210.0
+margin/left = 360.0
+margin/top = 0.0
+margin/right = 680.0
+margin/bottom = 40.0
 toggle_mode = true
 enabled_focus_mode = 2
 shortcut = null
@@ -138,16 +169,17 @@ text = "Fullscreen"
 flat = false
 align = 0
 
-[node name="cfgLowProcess" type="CheckButton" parent="."]
+[node name="cfgLowProcess" type="CheckButton" parent="scrollContainer/gridContainer"]
 
+rect/min_size = Vector2( 320, 40 )
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 60.0
-margin/top = 220.0
-margin/right = 380.0
-margin/bottom = 260.0
+margin/left = 0.0
+margin/top = 45.0
+margin/right = 320.0
+margin/bottom = 85.0
 toggle_mode = true
 enabled_focus_mode = 2
 shortcut = null
@@ -155,16 +187,17 @@ text = "Low Process Mode"
 flat = false
 align = 0
 
-[node name="cfgShadows" type="CheckButton" parent="."]
+[node name="cfgShadows" type="CheckButton" parent="scrollContainer/gridContainer"]
 
+rect/min_size = Vector2( 320, 40 )
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 60.0
-margin/top = 270.0
-margin/right = 380.0
-margin/bottom = 310.0
+margin/left = 360.0
+margin/top = 45.0
+margin/right = 680.0
+margin/bottom = 85.0
 toggle_mode = true
 enabled_focus_mode = 2
 shortcut = null
@@ -172,24 +205,72 @@ text = "Shadows"
 flat = false
 align = 0
 
-[node name="cfgShadowsQuality" type="Label" parent="."]
+[node name="cfgAntiAliasing" type="CheckButton" parent="scrollContainer/gridContainer"]
+
+rect/min_size = Vector2( 320, 40 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 90.0
+margin/right = 320.0
+margin/bottom = 130.0
+toggle_mode = true
+enabled_focus_mode = 2
+shortcut = null
+text = "Anti Aliasing"
+flat = false
+align = 0
+
+[node name="cfgGlow" type="CheckButton" parent="scrollContainer/gridContainer"]
+
+rect/min_size = Vector2( 320, 40 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 360.0
+margin/top = 90.0
+margin/right = 680.0
+margin/bottom = 130.0
+toggle_mode = true
+enabled_focus_mode = 2
+shortcut = null
+text = "Glow"
+flat = false
+align = 0
+
+[node name="cfgShadowsQuality" type="Control" parent="scrollContainer/gridContainer"]
 
 editor/display_folded = true
+rect/min_size = Vector2( 320, 40 )
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 67.0
-margin/top = 320.0
-margin/right = 387.0
-margin/bottom = 360.0
+margin/left = 0.0
+margin/top = 135.0
+margin/right = 320.0
+margin/bottom = 175.0
+
+[node name="label" type="Label" parent="scrollContainer/gridContainer/cfgShadowsQuality"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 6.0
+margin/top = 0.0
+margin/right = 111.0
+margin/bottom = 40.0
 text = "Shadows Quality"
 valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="list" type="OptionButton" parent="cfgShadowsQuality"]
+[node name="list" type="OptionButton" parent="scrollContainer/gridContainer/cfgShadowsQuality"]
 
 anchor/left = 1
 anchor/right = 1
@@ -210,24 +291,54 @@ align = 0
 selected = 0
 items = [ "Very Low", null, false, 0, null, "Low", null, false, 1, null, "Medium", null, false, 2, null, "High", null, false, 3, null, "Very High", null, false, 4, null ]
 
-[node name="cfgTargetFPS" type="Label" parent="."]
+[node name="cfgDynamicMenu" type="CheckButton" parent="scrollContainer/gridContainer"]
+
+rect/min_size = Vector2( 320, 40 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 360.0
+margin/top = 135.0
+margin/right = 680.0
+margin/bottom = 175.0
+toggle_mode = true
+enabled_focus_mode = 2
+shortcut = null
+text = "Dynamic Menu"
+flat = false
+align = 0
+
+[node name="cfgTargetFPS" type="Control" parent="scrollContainer/gridContainer"]
 
 editor/display_folded = true
+rect/min_size = Vector2( 320, 40 )
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 67.0
-margin/top = 370.0
-margin/right = 387.0
-margin/bottom = 410.0
+margin/left = 0.0
+margin/top = 180.0
+margin/right = 320.0
+margin/bottom = 220.0
+
+[node name="label" type="Label" parent="scrollContainer/gridContainer/cfgTargetFPS"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 6.0
+margin/top = 0.0
+margin/right = 111.0
+margin/bottom = 40.0
 text = "Target FPS"
 valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="list" type="OptionButton" parent="cfgTargetFPS"]
+[node name="list" type="OptionButton" parent="scrollContainer/gridContainer/cfgTargetFPS"]
 
 anchor/left = 1
 anchor/right = 1

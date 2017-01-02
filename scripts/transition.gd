@@ -8,6 +8,10 @@ const main_scene = "res://scenes/game.tscn"
 onready var animationPlayer = get_node("AnimationPlayer");
 
 var loader = null;
+var nextThink = 0.0;
+
+func _ready():
+	animationPlayer.play("fade_out");
 
 func change_scene(path):
 	if (is_processing()):
@@ -18,10 +22,15 @@ func change_scene(path):
 		return;
 	animationPlayer.play("fade_in");
 	set_process(true);
+	nextThink = 0.2;
 
 func _process(delta):
 	if (!loader):
 		set_process(false);
+		return;
+	
+	nextThink -= delta;
+	if (nextThink > 0.0):
 		return;
 	
 	var err = loader.poll();

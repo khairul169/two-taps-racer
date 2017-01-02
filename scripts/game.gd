@@ -3,21 +3,20 @@ extends Node
 onready var lblScore = get_node("gui/score");
 onready var lblScore2 = get_node("gui/score2");
 
-onready var camera = get_node("env/cam_base");
-onready var level = get_node("env/level");
+onready var camera = get_node("world/cam_base");
+onready var level = get_node("world/level");
 
 onready var vehicle = load("res://scenes/vehicle.tscn");
-onready var vehicle_node = get_node("env/vehicle");
+onready var vehicle_node = get_node("world/vehicle");
 
 onready var vehicle_ai = load("res://scenes/vehicle_ai.tscn");
-onready var vehicle_ai_node = get_node("env/vehicle_ai");
+onready var vehicle_ai_node = get_node("world/vehicle_ai");
 
 var curPos = Vector3();
 var curSpeed = 0.0;
 var vehiclePos = [0, 0];
 var curScore = 0.0;
 
-var enableShadow = true;
 var viewportSize = Vector2();
 
 var gameTime = 0.0;
@@ -56,12 +55,6 @@ func init_game():
 	vehicles[0].gameMain = self;
 	vehicles[1].gameMain = self;
 	
-	#if (OS.get_name() == "Android"):
-	#	enableShadow = false;
-	
-	enableShadow = globals.get_gamedata('cfg_shadows', true);
-	
-	get_node("env/sun").set_project_shadows(enableShadow);
 	get_node("gui/startGame").show();
 	get_node("gui/gameOver").hide();
 	

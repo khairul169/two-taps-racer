@@ -1,7 +1,8 @@
 extends Control
 
 enum TYPE {
-	CHECK = 0,
+	NONE = 0,
+	CHECK,
 	OPTION
 };
 
@@ -10,18 +11,30 @@ var configs = {};
 func _ready():
 	get_node("btnReturn").connect("pressed", self, "_return");
 	
-	bind_config("showfps", "cfgShowFPS", TYPE.CHECK, false);
-	bind_config("fullscreen", "cfgFullscreen", TYPE.CHECK, true);
-	bind_config("lowprocess", "cfgLowProcess", TYPE.CHECK, false);
-	bind_config("shadows", "cfgShadows", TYPE.CHECK, true);
-	bind_config("shadows_quality", "cfgShadowsQuality/list", TYPE.OPTION, 1);
-	bind_config("targetfps", "cfgTargetFPS/list", TYPE.OPTION, 0);
+	bind_config("showfps", "cfgShowFPS", false);
+	bind_config("fullscreen", "cfgFullscreen", true);
+	bind_config("lowprocess", "cfgLowProcess", false);
+	bind_config("shadows", "cfgShadows", true);
+	bind_config("shadows_quality", "cfgShadowsQuality/list", 1);
+	bind_config("targetfps", "cfgTargetFPS/list", 0);
+	
+	bind_config("antialiasing", "cfgAntiAliasing", false);
+	bind_config("glow", "cfgGlow", false);
+	bind_config("dynamicmenu", "cfgDynamicMenu", true);
 	
 	load_configs();
 
-func bind_config(key, nodeName, type, defval):
+func bind_config(key, nodeName, defval):
+	var node = get_node("scrollContainer/gridContainer/"+nodeName);
+	var type = TYPE.NONE;
+	
+	if (node extends CheckButton):
+		type = TYPE.CHECK;
+	if (node extends OptionButton):
+		type = TYPE.OPTION;
+	
 	configs[key] = {
-		'node': get_node(nodeName),
+		'node': node,
 		'type': type,
 		'defval': defval
 	};
