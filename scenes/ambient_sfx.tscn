@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=1]
 
 [ext_resource path="res://scripts/ambient_sfx.gd" type="Script" id=1]
-[ext_resource path="res://sfx/ambient/LunarHarvest.opus" type="AudioStream" id=2]
+[ext_resource path="res://sfx/ambient/Lunar Harvest v1_0.ogg" type="AudioStream" id=2]
 
 [node name="ambient_sfx" type="Node"]
 
