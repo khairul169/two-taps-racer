@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=1]
 
 [ext_resource path="res://scripts/mainmenu.gd" type="Script" id=1]
-[ext_resource path="res://etc/menubg/render.png" type="Texture" id=2]
+[ext_resource path="res://etc/menubg/render.jpg" type="Texture" id=2]
 [ext_resource path="res://sprites/title.png" type="Texture" id=3]
 
 [node name="mainmenu" type="Control"]
@@ -69,9 +69,9 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 290.0
+margin/left = 300.0
 margin/top = 220.0
-margin/right = 510.0
+margin/right = 500.0
 margin/bottom = 270.0
 toggle_mode = false
 enabled_focus_mode = 2
@@ -85,9 +85,9 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 290.0
+margin/left = 300.0
 margin/top = 300.0
-margin/right = 510.0
+margin/right = 500.0
 margin/bottom = 350.0
 toggle_mode = false
 enabled_focus_mode = 2
