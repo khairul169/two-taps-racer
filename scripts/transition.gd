@@ -36,6 +36,7 @@ func _process(delta):
 	var err = loader.poll();
 	if (err == ERR_FILE_EOF):
 		var resource = loader.get_resource();
+		globals.handle_quitRequest(null);
 		_set_scene(resource);
 		animationPlayer.play("fade_out");
 		loader = null;
@@ -45,5 +46,4 @@ func _process(delta):
 		set_process(false);
 
 func _set_scene(scn):
-	globals.handle_quitRequest(null);
 	get_tree().change_scene_to(scn);

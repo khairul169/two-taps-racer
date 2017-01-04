@@ -26,7 +26,7 @@ shader_param/vignetteColor = Color( 0.503906, 0.503906, 0.503906, 1 )
 shader_param/RADIUS = 0.75
 shader_param/SOFTNESS = 0.8
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 
 resource/name = "fadeIn"
 length = 0.2
@@ -48,9 +48,8 @@ tracks/2/interp = 1
 tracks/2/imported = false
 tracks/2/keys = { "times":FloatArray( 0, 0.2 ), "transitions":FloatArray( 1, 1 ), "update":0, "values":[ Vector2( 100, 60 ), Vector2( 60, 60 ) ] }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 
-resource/name = "fadeOut"
 length = 0.2
 loop = false
 step = 0.1
@@ -256,8 +255,8 @@ alignment = 1
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-anims/fadeIn = SubResource( 4 )
-anims/fadeOut = SubResource( 3 )
+anims/fadeIn = SubResource( 3 )
+anims/fadeOut = SubResource( 4 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
@@ -348,8 +347,8 @@ max_lines_visible = -1
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-anims/fadeIn = SubResource( 4 )
-anims/fadeOut = SubResource( 3 )
+anims/fadeIn = SubResource( 3 )
+anims/fadeOut = SubResource( 4 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]

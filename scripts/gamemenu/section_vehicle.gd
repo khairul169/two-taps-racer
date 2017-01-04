@@ -9,6 +9,7 @@ onready var vehicle_models = [
 ];
 
 onready var color_selector = get_node("colorSelector");
+onready var selectorButton = load("res://scenes/ui/selector_button.tscn");
 
 var vehiclePos = [-4.0, 4.0];
 var curVehicle = 0;
@@ -98,7 +99,7 @@ func fill_color_selector():
 	for i in range(globals.vehicleColorSet.size()):
 		var col = globals.vehicleColorSet[i];
 		var lock = i != 0 && i != 1 && !globals.unlockedColorSet.has(i);
-		var inst = preload("res://scenes/ui/selector_button.tscn").instance();
+		var inst = selectorButton.instance();
 		inst.set_name(col.to_html(false));
 		inst.set_colorFrame();
 		inst.set_color(col);
