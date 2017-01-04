@@ -31,6 +31,7 @@ var gameData = {};
 var encrypedSavegame = false;
 var targetFPS = [0, 30, 60, 120];
 var fpsLabel;
+var fpsNextUpdate = 0.0;
 
 enum SHADOWS {
 	VERY_LOW = 0,
@@ -82,8 +83,9 @@ func handle_quitRequest(node = null, method = ""):
 func _process(delta):
 	globalTime += delta;
 	
-	if (fpsLabel.is_visible()):
+	if (fpsLabel.is_visible() && globalTime > fpsNextUpdate):
 		fpsLabel.set_text("FPS: "+str(OS.get_frames_per_second()));
+		fpsNextUpdate = globalTime+1.0;
 
 func _exit_tree():
 	save_game();

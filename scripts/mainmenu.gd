@@ -8,6 +8,7 @@ var nextSpawn = 0.0;
 
 func _ready():
 	globals.handle_quitRequest(self, "quit");
+	randomize();
 	
 	get_node("gui/btnPlay").connect("pressed", self, "play");
 	get_node("gui/btnSettings").connect("pressed", self, "settings");
@@ -15,6 +16,7 @@ func _ready():
 	
 	if (globals.get_gamedata('cfg_dynamicmenu', true)):
 		get_node("gui/bgImage").queue_free();
+		build_level();
 		set_process(true);
 	else:
 		get_node("gui/bgImage").show();
@@ -36,6 +38,16 @@ func _process(delta):
 	if (nextSpawn <= 0.0):
 		spawn_ai();
 		nextSpawn = rand_range(4.0, 5.0);
+
+func build_level():
+	var startPos = Vector3();
+	var trackName = globals.trackList[0].name;
+	var scene = load("res://models/levels/"+trackName+"/level.scn");
+	
+	for i in range(2):
+		var inst = scene.instance();
+		inst.set_translation(startPos+Vector3(0, 0, -80*i));
+		get_node("world").add_child(inst);
 
 func spawn_ai():
 	if (vehicle_node.get_child_count() > 2):

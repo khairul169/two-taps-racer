@@ -45,4 +45,4 @@ func nav_next():
 	elif (curPage == SECTION.TRACK):
 		transition.change_scene(transition.main_scene);
 	
-	nextSwitch = globals.globalTime + 0.5;
+	nextSwitch = globals.globalTime + 0.1;

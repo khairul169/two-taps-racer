@@ -1,11 +1,8 @@
-[gd_scene load_steps=9 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://scripts/settings.gd" type="Script" id=1]
 [ext_resource path="res://sprites/white.png" type="Texture" id=2]
 [ext_resource path="res://fonts/imported/DroidSans32.fnt" type="BitmapFont" id=3]
-[ext_resource path="res://sprites/ui/btn_custom.png" type="Texture" id=4]
-[ext_resource path="res://sprites/ui/btn_custom_p.png" type="Texture" id=5]
-[ext_resource path="res://sprites/ui/btn_custom_h.png" type="Texture" id=6]
 
 [sub_resource type="CanvasItemShader" id=1]
 
@@ -67,7 +64,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="btnReturn" type="TextureButton" parent="."]
+[node name="btnReturn" type="Button" parent="."]
 
 editor/display_folded = true
 anchor/left = 1
@@ -83,9 +80,7 @@ margin/bottom = 90.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-textures/normal = ExtResource( 4 )
-textures/pressed = ExtResource( 5 )
-textures/hover = ExtResource( 6 )
+flat = false
 
 [node name="label" type="Label" parent="btnReturn"]
 

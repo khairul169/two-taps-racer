@@ -1,4 +1,0 @@
-== kenpixel_blocks.ttf ==
-Author: Kenney
-URL: http://opengameart.org/content/kenney-fonts
-
