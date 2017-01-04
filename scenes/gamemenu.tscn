@@ -1,15 +1,17 @@
-[gd_scene load_steps=13 format=1]
+[gd_scene load_steps=18 format=1]
 
 [ext_resource path="res://scripts/gamemenu.gd" type="Script" id=1]
 [ext_resource path="res://sprites/white.png" type="Texture" id=2]
 [ext_resource path="res://scripts/gamemenu/section_vehicle.gd" type="Script" id=3]
 [ext_resource path="res://fonts/imported/DroidSans32.fnt" type="BitmapFont" id=4]
-[ext_resource path="res://sprites/ui/btn_arrow.png" type="Texture" id=5]
-[ext_resource path="res://scripts/vehicle_preview_cam.gd" type="Script" id=6]
-[ext_resource path="res://models/cars/orlando/orlando.scn" type="PackedScene" id=7]
-[ext_resource path="res://sprites/ui/btn_custom.png" type="Texture" id=8]
-[ext_resource path="res://sprites/ui/btn_custom_p.png" type="Texture" id=9]
-[ext_resource path="res://sprites/ui/btn_custom_h.png" type="Texture" id=10]
+[ext_resource path="res://scripts/vehicle_preview_cam.gd" type="Script" id=5]
+[ext_resource path="res://models/cars/orlando/orlando.scn" type="PackedScene" id=6]
+[ext_resource path="res://scripts/gamemenu/section_track.gd" type="Script" id=7]
+[ext_resource path="res://tracks/desert/image.jpg" type="Texture" id=8]
+[ext_resource path="res://scripts/ui/custom_button.gd" type="Script" id=9]
+[ext_resource path="res://fonts/imported/DroidSans18.fnt" type="BitmapFont" id=10]
+[ext_resource path="res://sprites/ui/btn_arrow_l.png" type="Texture" id=11]
+[ext_resource path="res://sprites/ui/btn_arrow_r.png" type="Texture" id=12]
 
 [sub_resource type="CanvasItemShader" id=1]
 
@@ -23,6 +25,67 @@ shader_param/bgColor = Color( 0.109375, 0.109375, 0.109375, 1 )
 shader_param/vignetteColor = Color( 0.503906, 0.503906, 0.503906, 1 )
 shader_param/RADIUS = 0.75
 shader_param/SOFTNESS = 0.8
+
+[sub_resource type="Animation" id=4]
+
+resource/name = "fadeIn"
+length = 0.2
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visibility/opacity")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = { "times":FloatArray( 0, 0.2 ), "transitions":FloatArray( 1, 1 ), "update":0, "values":[ 0.0, 1.0 ] }
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visibility/visible")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ true ] }
+tracks/2/type = "value"
+tracks/2/path = NodePath("lblTitle:rect/pos")
+tracks/2/interp = 1
+tracks/2/imported = false
+tracks/2/keys = { "times":FloatArray( 0, 0.2 ), "transitions":FloatArray( 1, 1 ), "update":0, "values":[ Vector2( 100, 60 ), Vector2( 60, 60 ) ] }
+
+[sub_resource type="Animation" id=3]
+
+resource/name = "fadeOut"
+length = 0.2
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visibility/opacity")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = { "times":FloatArray( 0, 0.2 ), "transitions":FloatArray( 1, 1 ), "update":0, "values":[ 1.0, 0.0 ] }
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visibility/visible")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = { "times":FloatArray( 0, 0.2 ), "transitions":FloatArray( 1, 1 ), "update":1, "values":[ true, false ] }
+tracks/2/type = "value"
+tracks/2/path = NodePath("lblTitle:rect/pos")
+tracks/2/interp = 1
+tracks/2/imported = false
+tracks/2/keys = { "times":FloatArray( 0, 0.2 ), "transitions":FloatArray( 1, 1 ), "update":0, "values":[ Vector2( 60, 60 ), Vector2( 20, 60 ) ] }
+
+[sub_resource type="Animation" id=5]
+
+resource/name = "changed"
+length = 0.3
+loop = false
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visibility/opacity")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = { "times":FloatArray( 0, 0.1, 0.2, 0.3 ), "transitions":FloatArray( 1, 1, 1, 1 ), "update":0, "values":[ 1.0, 0.0, 0.0, 1.0 ] }
+tracks/1/type = "method"
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = { "times":FloatArray( 0.15 ), "transitions":FloatArray( 1 ), "values":[ { "args":[  ], "method":"change_preview" } ] }
 
 [node name="gamemenu" type="Control"]
 
@@ -57,6 +120,7 @@ stretch_mode = 0
 
 [node name="sectionVehicle" type="Control" parent="."]
 
+visibility/visible = false
 anchor/right = 1
 anchor/bottom = 1
 focus/ignore_mouse = false
@@ -84,22 +148,6 @@ text = "Select Vehicle"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-
-[node name="btnLeft" type="TextureFrame" parent="sectionVehicle"]
-
-anchor/top = 3
-anchor/bottom = 3
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 60.0
-margin/top = 110.0
-margin/right = 124.0
-margin/bottom = -140.0
-texture = ExtResource( 5 )
-expand = true
-stretch_mode = 0
 
 [node name="previewPane" type="TextureFrame" parent="sectionVehicle"]
 
@@ -162,7 +210,7 @@ shadow/zoffset_scale = 2.0
 
 editor/display_folded = true
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-script/script = ExtResource( 6 )
+script/script = ExtResource( 5 )
 
 [node name="Camera" type="Camera" parent="sectionVehicle/previewPane/vp/camera"]
 
@@ -179,32 +227,13 @@ environment = null
 h_offset = 0.0
 v_offset = 0.0
 
-[node name="vehicle1" parent="sectionVehicle/previewPane/vp" instance=ExtResource( 7 )]
+[node name="vehicle1" parent="sectionVehicle/previewPane/vp" instance=ExtResource( 6 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0 )
 
-[node name="vehicle2" parent="sectionVehicle/previewPane/vp" instance=ExtResource( 7 )]
+[node name="vehicle2" parent="sectionVehicle/previewPane/vp" instance=ExtResource( 6 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0 )
-
-[node name="btnRight" type="TextureFrame" parent="sectionVehicle"]
-
-anchor/left = 1
-anchor/top = 3
-anchor/right = 1
-anchor/bottom = 3
-rect/scale = Vector2( -1, 1 )
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 60.0
-margin/top = 110.0
-margin/right = -4.0
-margin/bottom = -140.0
-texture = ExtResource( 5 )
-expand = true
-stretch_mode = 0
 
 [node name="colorSelector" type="HBoxContainer" parent="sectionVehicle"]
 
@@ -222,78 +251,144 @@ margin/bottom = 30.0
 custom_constants/separation = 20
 alignment = 1
 
-[node name="btnPrev" type="TextureButton" parent="."]
+[node name="animation" type="AnimationPlayer" parent="sectionVehicle"]
 
-editor/display_folded = true
-anchor/left = 1
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/fadeIn = SubResource( 4 )
+anims/fadeOut = SubResource( 3 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""
+
+[node name="sectionTrack" type="Control" parent="."]
+
 anchor/right = 1
+anchor/bottom = 1
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 290.0
-margin/top = 40.0
-margin/right = 190.0
-margin/bottom = 90.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-textures/normal = ExtResource( 8 )
-textures/pressed = ExtResource( 9 )
-textures/hover = ExtResource( 10 )
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 0.0
+script/script = ExtResource( 7 )
 
-[node name="label" type="Label" parent="btnPrev"]
+[node name="lblTitle" type="Label" parent="sectionTrack"]
 
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 100.0
-margin/bottom = 50.0
-text = "Previous"
-align = 1
-valign = 1
+margin/left = 60.0
+margin/top = 60.0
+margin/right = 255.0
+margin/bottom = 93.0
+custom_fonts/font = ExtResource( 4 )
+text = "Select Track"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="btnNext" type="TextureButton" parent="."]
+[node name="previewPane" type="TextureFrame" parent="sectionTrack"]
 
 editor/display_folded = true
-anchor/left = 1
 anchor/right = 1
-focus/ignore_mouse = false
+anchor/bottom = 1
+focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 160.0
-margin/top = 40.0
-margin/right = 60.0
-margin/bottom = 90.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-textures/normal = ExtResource( 8 )
-textures/pressed = ExtResource( 9 )
-textures/hover = ExtResource( 10 )
+margin/top = 130.0
+margin/right = 160.0
+margin/bottom = 100.0
+texture = ExtResource( 8 )
+expand = true
+stretch_mode = 0
+script/script = ExtResource( 9 )
 
-[node name="label" type="Label" parent="btnNext"]
+[node name="animation" type="AnimationPlayer" parent="sectionTrack/previewPane"]
 
-focus/ignore_mouse = true
-focus/stop_mouse = true
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/changed = SubResource( 5 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""
+
+[node name="trackName" type="Label" parent="sectionTrack/previewPane"]
+
+anchor/top = 1
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = false
 size_flags/horizontal = 2
-size_flags/vertical = 0
+size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 0.0
-margin/right = 100.0
-margin/bottom = 50.0
-text = "Next"
+margin/top = -30.0
+margin/right = 0.0
+margin/bottom = -70.0
+custom_fonts/font = ExtResource( 10 )
+text = "#TRACKTITLE"
 align = 1
 valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+
+[node name="animation" type="AnimationPlayer" parent="sectionTrack"]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/fadeIn = SubResource( 4 )
+anims/fadeOut = SubResource( 3 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""
+
+[node name="btnPrev" type="TextureFrame" parent="."]
+
+anchor/top = 3
+anchor/bottom = 3
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 60.0
+margin/top = 110.0
+margin/right = 124.0
+margin/bottom = -140.0
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 0
+script/script = ExtResource( 9 )
+
+[node name="btnNext" type="TextureFrame" parent="."]
+
+anchor/left = 1
+anchor/top = 3
+anchor/right = 1
+anchor/bottom = 3
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 124.0
+margin/top = 110.0
+margin/right = 60.0
+margin/bottom = -140.0
+texture = ExtResource( 12 )
+expand = true
+stretch_mode = 0
+script/script = ExtResource( 9 )
 
 

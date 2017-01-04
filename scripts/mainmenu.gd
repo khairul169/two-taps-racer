@@ -7,6 +7,8 @@ onready var spawn_pos = get_node("world/spawnPos").get_translation();
 var nextSpawn = 0.0;
 
 func _ready():
+	globals.handle_quitRequest(self, "quit");
+	
 	get_node("gui/btnPlay").connect("pressed", self, "play");
 	get_node("gui/btnSettings").connect("pressed", self, "settings");
 	get_node("gui/btnQuit").connect("pressed", self, "quit");

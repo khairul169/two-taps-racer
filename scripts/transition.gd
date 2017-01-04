@@ -22,7 +22,7 @@ func change_scene(path):
 		return;
 	animationPlayer.play("fade_in");
 	set_process(true);
-	nextThink = 0.2;
+	nextThink = 0.1;
 
 func _process(delta):
 	if (!loader):
@@ -45,4 +45,5 @@ func _process(delta):
 		set_process(false);
 
 func _set_scene(scn):
+	globals.handle_quitRequest(null);
 	get_tree().change_scene_to(scn);

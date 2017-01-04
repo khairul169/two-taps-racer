@@ -1,22 +1,28 @@
 extends Node
 
+var globalTime = 0.0;
+
 var vehicleColorSet = [
-	Color("222222"),
-	Color("ababab"),
 	Color("2c5f93"),
 	Color("932c2c"),
+	Color("222222"),
+	Color("ababab"),
 	Color("cfcd42"),
 	Color("5c982c"),
 	Color("bf5b9d"),
 	Color("e55731")
 ];
 
-var vehicleColor = [
-	Color("2c5f93"),
-	Color("932c2c")
-];
+var unlockedColorSet = [];
+var vehicleColor = [vehicleColorSet[0], vehicleColorSet[1]];
 
-var highScore = 0;
+var trackList = [
+	{'name': "desert", 'title': "Desert"},
+	{'name': "plains", 'title': "Plains"}
+];
+var trackSelected = -1;
+
+var bestRun = 0;
 
 var filePass = str("myuniquepassword").md5_text();
 var saveGame = "user://savegame.dat";
@@ -33,7 +39,11 @@ enum SHADOWS {
 	VERY_HIGH
 };
 
+var quitRequestHandler = null;
+
 func _ready():
+	get_tree().set_auto_accept_quit(false);
+	
 	# Create Canvas Layer for GUI
 	var layer = CanvasLayer.new();
 	layer.set_layer(5);
@@ -49,9 +59,28 @@ func _ready():
 	load_game();
 	apply_configs();
 	
+	# Test
+	for i in range(0, vehicleColorSet.size()):
+		unlockedColorSet.push_back(i);
+	
 	set_process(true);
 
+func _notification(what):
+	if (what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST):
+		if (quitRequestHandler != null):
+			quitRequestHandler.node.call(quitRequestHandler.method);
+		else:
+			get_tree().quit();
+
+func handle_quitRequest(node = null, method = ""):
+	if (!node):
+		quitRequestHandler = null;
+	else:
+		quitRequestHandler = {'node': node, 'method': method};
+
 func _process(delta):
+	globalTime += delta;
+	
 	if (fpsLabel.is_visible()):
 		fpsLabel.set_text("FPS: "+str(OS.get_frames_per_second()));
 
@@ -70,19 +99,15 @@ func load_game():
 	gameData.parse_json(data);
 	f.close();
 	
-	var vCol = get_gamedata('vehicle_color', ["2c5f93", "932c2c"]);
-	vehicleColor[0] = Color(vCol[0]);
-	vehicleColor[1] = Color(vCol[1]);
-	
-	highScore = get_gamedata('highscore', 0);
+	unlockedColorSet = get_gamedata('color_unlocked', []);
+	var col = get_gamedata('vehicle_color', [vehicleColorSet[0].to_html(false), vehicleColorSet[1].to_html(false)]);
+	vehicleColor = [Color(col[0]), Color(col[1])];
+	bestRun = get_gamedata('bestrun', 0);
 
 func save_game():
-	gameData['vehicle_color'] = [
-		vehicleColor[0].to_html(false),
-		vehicleColor[1].to_html(false)
-	];
-	
-	gameData['highscore'] = highScore;
+	set_gamedata('color_unlocked', unlockedColorSet);
+	set_gamedata('vehicle_color', [vehicleColor[0].to_html(false), vehicleColor[1].to_html(false)]);
+	set_gamedata('bestrun', bestRun);
 	
 	var f = File.new();
 	if (encrypedSavegame):

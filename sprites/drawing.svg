@@ -44,6 +44,15 @@
        y2="352.3622"
        gradientUnits="userSpaceOnUse"
        gradientTransform="translate(-299.00515,-236.37569)" />
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Blur"
+       id="filter4233">
+      <feGaussianBlur
+         stdDeviation="2 2"
+         result="blur"
+         id="feGaussianBlur4235" />
+    </filter>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -52,9 +61,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.8"
-     inkscape:cx="284.10347"
-     inkscape:cy="965.78702"
+     inkscape:zoom="5.6"
+     inkscape:cx="167.64067"
+     inkscape:cy="842.42166"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -80,10 +89,71 @@
      inkscape:groupmode="layer"
      id="layer1">
     <rect
+       style="fill:#292929;fill-opacity:1;stroke:none;stroke-width:5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4273"
+       width="47.32143"
+       height="44.642857"
+       x="127.5"
+       y="168.25507"
+       ry="1.25596" />
+    <g
+       id="g4244"
+       inkscape:export-filename="/home/khairul/Projects/two-taps-racer/sprites/items/item_coin.png"
+       inkscape:export-xdpi="107.99456"
+       inkscape:export-ydpi="107.99456">
+      <g
+         id="g4229"
+         style="fill:#000000;fill-opacity:0.5;filter:url(#filter4233)">
+        <circle
+           inkscape:export-ydpi="97.195076"
+           inkscape:export-xdpi="97.195076"
+           inkscape:export-filename="/home/khairul/Projects/two-taps-racer/sprites/items/item_coin.png"
+           r="16.667517"
+           cy="148.27568"
+           cx="156.06857"
+           id="circle4231"
+           style="fill:#000000;fill-opacity:0.5;stroke:none;stroke-width:5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      </g>
+      <g
+         id="g4237">
+        <g
+           id="g4226"
+           style="fill:#e5a55f;fill-opacity:1">
+          <circle
+             inkscape:export-ydpi="97.195076"
+             inkscape:export-xdpi="97.195076"
+             inkscape:export-filename="/home/khairul/Projects/two-taps-racer/sprites/items/item_coin.png"
+             r="16.667517"
+             cy="148.27568"
+             cx="156.06857"
+             id="path4198"
+             style="fill:#e5a55f;fill-opacity:1;stroke:none;stroke-width:5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+        </g>
+        <circle
+           r="11.364216"
+           cy="148.27568"
+           cx="156.06857"
+           id="circle4200"
+           style="fill:#fadd7d;fill-opacity:1;stroke:none;stroke-width:5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#e5a55f;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           x="150.29221"
+           y="154.52629"
+           id="text4202"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan4204"
+             x="150.29221"
+             y="154.52629"
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:17.5px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans Bold';fill:#e5a55f;fill-opacity:1">C</tspan></text>
+      </g>
+    </g>
+    <rect
        style="fill:#2c2c2c;fill-opacity:1;stroke:none;stroke-width:5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect4166"
-       width="704.77533"
-       height="490.66141"
+       width="95.4692"
+       height="192.51772"
        x="21.337868"
        y="21.536192" />
     <path
@@ -102,5 +172,12 @@
        height="50"
        x="193.57143"
        y="58.076496" />
+    <path
+       style="fill:#f0f0f0;fill-opacity:1;stroke:none;stroke-width:5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 140.98828 173.07617 C 138.80855 173.07617 137.05273 174.83198 137.05273 177.01172 L 137.05273 201.10547 C 137.05273 203.2852 138.80855 205.04102 140.98828 205.04102 L 165.08398 205.04102 C 167.26372 205.04102 169.01758 203.2852 169.01758 201.10547 L 169.01758 177.01172 C 169.01758 174.83198 167.26372 173.07617 165.08398 173.07617 L 140.98828 173.07617 z M 149.06445 176.64062 L 157.00391 176.64062 C 158.43885 176.64063 159.59375 177.79748 159.59375 179.23242 L 159.59375 188.85547 L 160.01758 188.85547 C 160.86174 188.85547 161.54297 189.53475 161.54297 190.37891 L 161.54297 199.95312 C 161.54297 200.79729 160.86174 201.47656 160.01758 201.47656 L 146.05078 201.47656 C 145.20662 201.47656 144.52734 200.79728 144.52734 199.95312 L 144.52734 190.37891 C 144.52734 189.53475 145.20662 188.85547 146.05078 188.85547 L 146.47461 188.85547 L 146.47461 179.23242 C 146.47461 177.79748 147.62951 176.64062 149.06445 176.64062 z M 150.34961 179.43164 C 149.65381 179.43164 149.09375 179.9917 149.09375 180.6875 L 149.09375 186.16211 C 149.09375 186.85791 149.65381 187.41797 150.34961 187.41797 L 155.71875 187.41797 C 156.41455 187.41797 156.97461 186.85791 156.97461 186.16211 L 156.97461 180.6875 C 156.97461 179.9917 156.41455 179.43164 155.71875 179.43164 L 150.34961 179.43164 z "
+       id="rect4275"
+       inkscape:export-filename="/home/khairul/Projects/two-taps-racer/sprites/ui/lock_icon.png"
+       inkscape:export-xdpi="90.098984"
+       inkscape:export-ydpi="90.098984" />
   </g>
 </svg>

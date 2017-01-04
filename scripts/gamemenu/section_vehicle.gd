@@ -20,10 +20,15 @@ func _ready():
 	fill_color_selector();
 	update_vehicle();
 	
+	vehicle_cam.set_translation(Vector3(vehiclePos[curVehicle], 0, 0));
+	
 	set_process(true);
 	set_process_input(true);
 
 func _input(ie):
+	if (!is_visible()):
+		return;
+	
 	if (ie.type == InputEvent.KEY):
 		if (Input.is_action_just_pressed("ui_select")):
 			curVehicle += 1;
@@ -57,6 +62,9 @@ func _screen_resized():
 	vehicle_vp.set_rect(vp_rect);
 
 func _process(delta):
+	if (!is_visible()):
+		return;
+	
 	var rot = vehicle_models[0].get_rotation_deg();
 	rot.y = fmod(rot.y + 30*delta, 360.0);
 	vehicle_models[0].set_rotation_deg(rot);
@@ -69,11 +77,13 @@ func update_vehicle():
 	update_color(vehicle_models[0], globals.vehicleColor[0]);
 	update_color(vehicle_models[1], globals.vehicleColor[1]);
 
-func color_changed(new):
+func color_changed(node):
 	if (curVehicle < 0 || curVehicle >= globals.vehicleColor.size()):
 		return;
+	if (node.is_locked()):
+		return;
 	
-	globals.vehicleColor[curVehicle] = new;
+	globals.vehicleColor[curVehicle] = node.get_color();
 	update_vehicle();
 
 func update_color(vehicle, col):
@@ -85,9 +95,13 @@ func update_color(vehicle, col):
 			break;
 
 func fill_color_selector():
-	for i in globals.vehicleColorSet:
-		var inst = preload("res://scenes/ui/colorbox.tscn").instance();
-		inst.set_name(i.to_html(false));
-		inst.set_color(i);
+	for i in range(globals.vehicleColorSet.size()):
+		var col = globals.vehicleColorSet[i];
+		var lock = i != 0 && i != 1 && !globals.unlockedColorSet.has(i);
+		var inst = preload("res://scenes/ui/selector_button.tscn").instance();
+		inst.set_name(col.to_html(false));
+		inst.set_colorFrame();
+		inst.set_color(col);
+		inst.set_locked(lock);
 		inst.connect("selected", self, "color_changed");
 		color_selector.add_child(inst);

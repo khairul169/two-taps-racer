@@ -1,11 +1,12 @@
-[gd_scene load_steps=9 format=1]
+[gd_scene load_steps=10 format=1]
 
 [ext_resource path="res://scripts/game.gd" type="Script" id=1]
 [ext_resource path="res://sprites/white.png" type="Texture" id=2]
 [ext_resource path="res://fonts/imported/kenpixel_blocks32.fnt" type="BitmapFont" id=3]
 [ext_resource path="res://fonts/imported/kenpixel_blocks24.fnt" type="BitmapFont" id=4]
-[ext_resource path="res://scenes/scenery.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scripts/level_generator.gd" type="Script" id=6]
+[ext_resource path="res://sprites/items/item_coin.png" type="Texture" id=5]
+[ext_resource path="res://scenes/scenery.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scripts/level_generator.gd" type="Script" id=7]
 
 [sub_resource type="CanvasItemShader" id=1]
 
@@ -15,8 +16,8 @@ _code = { "fragment":"//Source: https://github.com/mattdesl/lwjgl-basics/wiki/Sh
 
 shader/shader = SubResource( 1 )
 shader/shading_mode = 0
-shader_param/RADIUS = 0.75
-shader_param/SOFTNESS = 0.45
+shader_param/RADIUS = 0.8
+shader_param/SOFTNESS = 0.4
 
 [node name="game" type="Node"]
 
@@ -35,7 +36,7 @@ margin/top = 0.0
 margin/right = 0.0
 margin/bottom = 0.0
 
-[node name="fx_vignette" type="TextureFrame" parent="gui"]
+[node name="vignette" type="TextureFrame" parent="gui"]
 
 material/material = SubResource( 2 )
 anchor/right = 1
@@ -85,6 +86,38 @@ text = "High: 102312"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+
+[node name="coins" type="Label" parent="gui"]
+
+editor/display_folded = true
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 640.0
+margin/top = 30.0
+margin/right = 760.0
+margin/bottom = 66.0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "99999"
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="icon" type="TextureFrame" parent="gui/coins"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = -56.0
+margin/top = -6.0
+margin/right = -8.0
+margin/bottom = 42.0
+texture = ExtResource( 5 )
+stretch_mode = 0
 
 [node name="startGame" type="Control" parent="gui"]
 
@@ -209,7 +242,7 @@ flat = false
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
-[node name="scenery" parent="world" instance=ExtResource( 5 )]
+[node name="scenery" parent="world" instance=ExtResource( 6 )]
 
 [node name="cam_base" type="Spatial" parent="world"]
 
@@ -234,13 +267,17 @@ v_offset = 0.0
 [node name="level" type="Spatial" parent="world"]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-script/script = ExtResource( 6 )
+script/script = ExtResource( 7 )
 
 [node name="vehicle" type="Spatial" parent="world"]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="vehicle_ai" type="Spatial" parent="world"]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="items" type="Spatial" parent="world"]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 

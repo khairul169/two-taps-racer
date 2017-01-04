@@ -9,6 +9,8 @@ enum TYPE {
 var configs = {};
 
 func _ready():
+	globals.handle_quitRequest(self, "_return");
+	
 	get_node("btnReturn").connect("pressed", self, "_return");
 	
 	bind_config("showfps", "cfgShowFPS", false);
