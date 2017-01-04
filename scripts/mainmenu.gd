@@ -30,7 +30,8 @@ func settings():
 
 func quit():
 	globals.save_game();
-	get_tree().quit();
+	#get_tree().quit();
+	transition.quit_game();
 
 func _process(delta):
 	nextSpawn -= delta;
