@@ -195,6 +195,9 @@ func spawn_items():
 	nextSpawnItems = gameTime + rand_range(0.5, 1.0);
 
 func item_collected(item):
+	if (!gameStarted || gameOver):
+		return;
+	
 	curCoins += 1;
 	item.queue_free();
 
