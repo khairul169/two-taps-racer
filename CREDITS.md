@@ -1,12 +1,6 @@
-### fonts/kenpixel_blocks.ttf
-**Author:** Kenney
-**URL:** http://opengameart.org/content/kenney-fonts
+# Credits
+Below is the list of assets that i've used for this project. Thanks for the nice assets ;)
 
-### sfx/ambient/Lunar Harvest v1_0.ogg
-**Author:** FoxSynergy
-**URL:** http://opengameart.org/content/lunar-harvest
-
-### sprites/ui/Button.svg
-**Author:** pzUH
-**URL:** http://opengameart.org/content/casual-game-button-pack
-
+- fonts/kenpixel_blocks.ttf by Kenney (http://opengameart.org/content/kenney-fonts)
+- sfx/ambient/Lunar Harvest v1_0.ogg by FoxSynergy (http://opengameart.org/content/lunar-harvest)
+- sprites/ui/Button.svg by pzUH (http://opengameart.org/content/casual-game-button-pack)
