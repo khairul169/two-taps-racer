@@ -224,6 +224,7 @@ func end_game():
 	if (curRunLength > globals.bestRun):
 		globals.bestRun = curRunLength;
 	
+	globals.totalCoins += curCoins;
 	globals.save_game();
 	
 	get_node("gui/gameOver").show();

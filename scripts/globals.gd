@@ -23,6 +23,7 @@ var trackList = [
 var trackSelected = -1;
 
 var bestRun = 0;
+var totalCoins = 0;
 
 var filePass = str("myuniquepassword").md5_text();
 var saveGame = "user://savegame.dat";
@@ -102,12 +103,15 @@ func load_game():
 	unlockedColorSet = get_gamedata('color_unlocked', []);
 	var col = get_gamedata('vehicle_color', [vehicleColorSet[0].to_html(false), vehicleColorSet[1].to_html(false)]);
 	vehicleColor = [Color(col[0]), Color(col[1])];
+	
 	bestRun = get_gamedata('bestrun', 0);
+	totalCoins = get_gamedata('coins', 0);
 
 func save_game():
 	set_gamedata('color_unlocked', unlockedColorSet);
 	set_gamedata('vehicle_color', [vehicleColor[0].to_html(false), vehicleColor[1].to_html(false)]);
 	set_gamedata('bestrun', bestRun);
+	set_gamedata('coins', totalCoins);
 	
 	var f = File.new();
 	if (encrypedSavegame):
