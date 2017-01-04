@@ -22,6 +22,7 @@ func _ready():
 	update_vehicle();
 	
 	vehicle_cam.set_translation(Vector3(vehiclePos[curVehicle], 0, 0));
+	vehicle_preview.connect("pressed", self, "increase_curVehicle");
 	
 	set_process(true);
 	set_process_input(true);
@@ -38,15 +39,13 @@ func _input(ie):
 		if (Input.is_action_just_pressed("ui_right")):
 			curVehicle -= 1;
 		
-		update_curvehicle();
-	
-	if ((ie.type == InputEvent.SCREEN_TOUCH || ie.type == InputEvent.MOUSE_BUTTON) && ie.pressed):
-		if (vehicle_preview.get_global_rect().has_point(ie.pos)):
-			curVehicle += 1;
-		
-		update_curvehicle();
+		update_curVehicle();
 
-func update_curvehicle():
+func increase_curVehicle():
+	curVehicle += 1;
+	update_curVehicle();
+
+func update_curVehicle():
 	if (curVehicle >= vehiclePos.size()):
 		curVehicle = 0;
 	if (curVehicle < 0):
